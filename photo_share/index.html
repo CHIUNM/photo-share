@@ -39,7 +39,7 @@
         h1 {
             color: #ffffff;
             font-size: 48px;
-            margin: 0 10px 10px;
+            margin: 0 10px 15px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in;
             word-wrap: break-word;
@@ -89,13 +89,17 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         #gallery {
-            margin-top: 30px;
+            margin-top: 20px;
             width: 100%;
-            max-width: 800px; /* 限制圖片區域最大寬度 */
+            max-width: 1000px; /* 增加最大寬度，充分利用螢幕 */
             box-sizing: border-box;
             position: relative;
             opacity: 0;
             transition: opacity 1s ease-in;
+            flex-grow: 1; /* 讓圖片區域填滿剩餘空間 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         #gallery.show {
             opacity: 1;
@@ -110,16 +114,16 @@
         .slideshow-container {
             position: relative;
             width: 100%;
-            height: 60vh; /* 圖片區域高度適應螢幕 */
+            height: 70vh; /* 增加高度，填滿更多螢幕空間 */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .slideshow-container img {
-            display: none; /* 預設隱藏所有圖片 */
+            display: none;
             width: 100%;
             height: auto;
-            max-height: 100%; /* 限制圖片高度 */
+            max-height: 100%;
             border: 5px solid rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -127,7 +131,7 @@
             box-sizing: border-box;
         }
         .slideshow-container img.active {
-            display: block; /* 顯示當前圖片 */
+            display: block;
             opacity: 1;
         }
         .nav-buttons {
@@ -137,11 +141,14 @@
             display: flex;
             justify-content: space-between;
             transform: translateY(-50%);
+            padding: 0 20px; /* 增加按鈕與邊緣的距離 */
+            box-sizing: border-box;
         }
         .nav-buttons button {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 18px;
             font-size: 18px;
+            border-radius: 50%; /* 圓形按鈕 */
         }
         @keyframes fadeIn {
             from {
@@ -159,11 +166,18 @@
                 font-size: 36px;
             }
             .slideshow-container {
-                height: 50vh;
+                height: 60vh;
+            }
+            .slideshow-container img {
+                max-width: 90%;
             }
             input[type="password"] {
                 width: 180px;
                 max-width: 90%;
+            }
+            .nav-buttons button {
+                padding: 10px 15px;
+                font-size: 16px;
             }
         }
         @media (max-width: 480px) {
@@ -174,10 +188,10 @@
                 font-size: 24px;
             }
             .slideshow-container {
-                height: 40vh;
+                height: 50vh;
             }
             .slideshow-container img {
-                max-width: 90%;
+                max-width: 85%;
             }
             input[type="password"] {
                 width: 160px;
@@ -186,9 +200,12 @@
             button {
                 padding: 10px 20px;
             }
+            .nav-buttons {
+                padding: 0 10px;
+            }
             .nav-buttons button {
                 padding: 8px 12px;
-                font-size: 16px;
+                font-size: 14px;
             }
         }
     </style>
@@ -215,7 +232,8 @@
             <img src="20240411巴西布基阿斯11.jpg" alt="20240411巴西布基阿斯11.jpg">
             <img src="20240411巴西布基阿斯12.jpg" alt="20240411巴西布基阿斯12.jpg">
             <img src="20240411巴西布基阿斯13.jpg" alt="20240411巴西布基阿斯13.jpg">
-            <img src="20240411巴西布基阿斯14.jpg" alt="20240411巴西布基阿斯14.jpg">
+            <img src="2024
+0411巴西布基阿斯14.jpg" alt="20240411巴西布基阿斯14.jpg">
             <img src="20240411巴西布基阿斯15.jpg" alt="20240411巴西布基阿斯15.jpg">
             <img src="20240411巴西布基阿斯16.jpg" alt="20240411巴西布基阿斯16.jpg">
             <img src="20240411巴西布基阿斯17.jpg" alt="20240411巴西布基阿斯17.jpg">
@@ -250,14 +268,13 @@
                 document.getElementById("pass").style.display = "none";
                 document.querySelector("button[onclick='checkPassword()']").style.display = "none";
                 document.querySelector("p").style.display = "none";
-                showSlide(currentSlide); // 顯示第一張照片
+                showSlide(currentSlide);
             } else {
                 alert("密碼錯誤！");
             }
         }
 
         function showSlide(index) {
-            // 確保索引在有效範圍內
             if (index >= slides.length) {
                 currentSlide = 0;
             } else if (index < 0) {
@@ -266,7 +283,6 @@
                 currentSlide = index;
             }
 
-            // 隱藏所有照片，顯示當前照片
             slides.forEach(slide => slide.classList.remove('active'));
             slides[currentSlide].classList.add('active');
         }
