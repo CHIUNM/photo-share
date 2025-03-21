@@ -2,72 +2,165 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <title>我的照片分享</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南美洲的世外桃源 - 巴西布基阿斯</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #f4f4f9;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 20px;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
         }
         h1 {
-            color: #2c3e50;
-            font-size: 36px;
+            color: #ffffff;
+            font-size: 48px;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in;
         }
         p {
-            color: #7f8c8d;
-            font-size: 18px;
+            color: #e0e0e0;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         input[type="password"] {
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            width: 200px;
+            border: none;
+            border-radius: 25px;
+            width: 220px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+            background: rgba(255, 255, 255, 1);
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 30px;
             font-size: 16px;
-            background-color: #3498db;
+            background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
         button:hover {
-            background-color: #2980b9;
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         #gallery {
-            margin-top: 20px;
+            margin-top: 30px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
             justify-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+        #gallery.show {
+            opacity: 1;
         }
         #gallery h2 {
-            color: #2c3e50;
-            font-size: 28px;
+            color: #ffffff;
+            font-size: 32px;
             grid-column: 1 / -1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in;
         }
         #gallery img {
             max-width: 100%;
             height: auto;
-            border: 3px solid #ecf0f1;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-in;
+        }
+        #gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: #3498db;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+            #gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            input[type="password"] {
+                width: 180px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+            #gallery {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            input[type="password"] {
+                width: 160px;
+            }
+            button {
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>歡迎來到我的照片頁面</h1>
+    <h1>南美洲的世外桃源 巴西布基阿斯</h1>
     <p>請輸入密碼來查看照片</p>
     <input type="password" id="pass" placeholder="輸入密碼">
     <button onclick="checkPassword()">進入</button>
 
     <div id="gallery" style="display: none;">
-        <h2>我的照片</h2>
+        <h2>巴西布基阿斯</h2>
         <img src="20240411巴西布基阿斯01.jpg" alt="20240411巴西布基阿斯01.jpg">
         <img src="20240411巴西布基阿斯02.jpg" alt="20240411巴西布基阿斯02.jpg">
         <img src="20240411巴西布基阿斯03.jpg" alt="20240411巴西布基阿斯03.jpg">
@@ -104,6 +197,7 @@
             const password = document.getElementById("pass").value;
             if (password === "12345") {
                 document.getElementById("gallery").style.display = "block";
+                document.getElementById("gallery").classList.add("show");
                 document.getElementById("pass").style.display = "none";
                 document.querySelector("button").style.display = "none";
                 document.querySelector("p").style.display = "none";
