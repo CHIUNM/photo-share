@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <title>我的照片分享</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #gallery {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        #gallery h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            grid-column: 1 / -1;
+        }
+        #gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 3px solid #ecf0f1;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>歡迎來到我的照片頁面</h1>
+    <p>請輸入密碼來查看照片</p>
+    <input type="password" id="pass" placeholder="輸入密碼">
+    <button onclick="checkPassword()">進入</button>
+
+    <div id="gallery" style="display: none;">
+        <h2>我的照片</h2>
+        <img src="photo1.jpg" alt="照片1">
+        <img src="photo2.jpg" alt="照片2">
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("pass").value;
+            if (password === "12345") {
+                document.getElementById("gallery").style.display = "block";
+                document.getElementById("pass").style.display = "none";
+                document.querySelector("button").style.display = "none";
+                document.querySelector("p").style.display = "none";
+            } else {
+                alert("密碼錯誤！");
+            }
+        }
+    </script>
+</body>
+</html>
