@@ -10,7 +10,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow-x: hidden; /* 防止水平滾動條 */
+            overflow-x: hidden;
         }
         body {
             font-family: 'Arial', sans-serif;
@@ -19,7 +19,7 @@
             background-size: cover;
             color: #fff;
             position: relative;
-            min-height: 100vh; /* 確保高度至少填滿螢幕 */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,7 +42,7 @@
             margin: 0 10px 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in;
-            word-wrap: break-word; /* 防止標題過長溢出 */
+            word-wrap: break-word;
         }
         p {
             color: #e0e0e0;
@@ -56,7 +56,7 @@
             border: none;
             border-radius: 25px;
             width: 220px;
-            max-width: 80%; /* 限制寬度，適應小螢幕 */
+            max-width: 80%;
             background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
@@ -77,7 +77,7 @@
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin: 10px;
         }
         button:hover {
             background: linear-gradient(45deg, #2980b9, #3498db);
@@ -90,16 +90,12 @@
         }
         #gallery {
             margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            justify-items: center;
+            width: 100%;
+            max-width: 800px; /* 限制圖片區域最大寬度 */
+            box-sizing: border-box;
+            position: relative;
             opacity: 0;
             transition: opacity 1s ease-in;
-            width: 100%;
-            max-width: 1200px; /* 限制最大寬度 */
-            box-sizing: border-box;
-            padding: 0 10px; /* 兩側留白，防止圖片貼邊 */
         }
         #gallery.show {
             opacity: 1;
@@ -107,26 +103,45 @@
         #gallery h2 {
             color: #ffffff;
             font-size: 32px;
-            grid-column: 1 / -1;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in;
-            margin: 0;
+            margin: 0 0 20px;
         }
-        #gallery img {
-            width: 100%; /* 圖片寬度填滿格子 */
-            max-width: 100%;
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 60vh; /* 圖片區域高度適應螢幕 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slideshow-container img {
+            display: none; /* 預設隱藏所有圖片 */
+            width: 100%;
             height: auto;
+            max-height: 100%; /* 限制圖片高度 */
             border: 5px solid rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-in;
+            transition: opacity 0.5s ease;
             box-sizing: border-box;
         }
-        #gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            border-color: #3498db;
+        .slideshow-container img.active {
+            display: block; /* 顯示當前圖片 */
+            opacity: 1;
+        }
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .nav-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            font-size: 18px;
         }
         @keyframes fadeIn {
             from {
@@ -143,10 +158,8 @@
             h1 {
                 font-size: 36px;
             }
-            #gallery {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 15px;
-                padding: 0 5px;
+            .slideshow-container {
+                height: 50vh;
             }
             input[type="password"] {
                 width: 180px;
@@ -157,14 +170,14 @@
             h1 {
                 font-size: 28px;
             }
-            #gallery {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                padding: 0 5px;
+            #gallery h2 {
+                font-size: 24px;
             }
-            #gallery img {
-                max-width: 90%; /* 在小螢幕上限制圖片寬度，留出邊距 */
-                margin: 0 auto;
+            .slideshow-container {
+                height: 40vh;
+            }
+            .slideshow-container img {
+                max-width: 90%;
             }
             input[type="password"] {
                 width: 160px;
@@ -172,6 +185,10 @@
             }
             button {
                 padding: 10px 20px;
+            }
+            .nav-buttons button {
+                padding: 8px 12px;
+                font-size: 16px;
             }
         }
     </style>
@@ -184,49 +201,78 @@
 
     <div id="gallery" style="display: none;">
         <h2>巴西布基阿斯</h2>
-        <img src="20240411巴西布基阿斯01.jpg" alt="20240411巴西布基阿斯01.jpg">
-        <img src="20240411巴西布基阿斯02.jpg" alt="20240411巴西布基阿斯02.jpg">
-        <img src="20240411巴西布基阿斯03.jpg" alt="20240411巴西布基阿斯03.jpg">
-        <img src="20240411巴西布基阿斯04.jpg" alt="20240411巴西布基阿斯04.jpg">
-        <img src="20240411巴西布基阿斯05.jpg" alt="20240411巴西布基阿斯05.jpg">
-        <img src="20240411巴西布基阿斯06.jpg" alt="20240411巴西布基阿斯06.jpg">
-        <img src="20240411巴西布基阿斯07.jpg" alt="20240411巴西布基阿斯07.jpg">
-        <img src="20240411巴西布基阿斯08.jpg" alt="20240411巴西布基阿斯08.jpg">
-        <img src="20240411巴西布基阿斯09.jpg" alt="20240411巴西布基阿斯09.jpg">
-        <img src="20240411巴西布基阿斯10.jpg" alt="20240411巴西布基阿斯10.jpg">
-        <img src="20240411巴西布基阿斯11.jpg" alt="20240411巴西布基阿斯11.jpg">
-        <img src="20240411巴西布基阿斯12.jpg" alt="20240411巴西布基阿斯12.jpg">
-        <img src="20240411巴西布基阿斯13.jpg" alt="20240411巴西布基阿斯13.jpg">
-        <img src="20240411巴西布基阿斯14.jpg" alt="20240411巴西布基阿斯14.jpg">
-        <img src="20240411巴西布基阿斯15.jpg" alt="20240411巴西布基阿斯15.jpg">
-        <img src="20240411巴西布基阿斯16.jpg" alt="20240411巴西布基阿斯16.jpg">
-        <img src="20240411巴西布基阿斯17.jpg" alt="20240411巴西布基阿斯17.jpg">
-        <img src="20240411巴西布基阿斯18.jpg" alt="20240411巴西布基阿斯18.jpg">
-        <img src="20240411巴西布基阿斯19.jpg" alt="20240411巴西布基阿斯19.jpg">
-        <img src="20240411巴西布基阿斯20.jpg" alt="20240411巴西布基阿斯20.jpg">
-        <img src="20240411巴西布基阿斯21.jpg" alt="20240411巴西布基阿斯21.jpg">
-        <img src="20240411巴西布基阿斯22.jpg" alt="20240411巴西布基阿斯22.jpg">
-        <img src="20240411巴西布基阿斯23.jpg" alt="20240411巴西布基阿斯23.jpg">
-        <img src="20240411巴西布基阿斯24.jpg" alt="20240411巴西布基阿斯24.jpg">
-        <img src="20240411巴西布基阿斯25.jpg" alt="20240411巴西布基阿斯25.jpg">
-        <img src="20240411巴西布基阿斯26.jpg" alt="20240411巴西布基阿斯26.jpg">
-        <img src="20240411巴西布基阿斯27.jpg" alt="20240411巴西布基阿斯27.jpg">
-        <img src="20240411巴西布基阿斯28.jpg" alt="20240411巴西布基阿斯28.jpg">
-        <img src="20240411巴西布基阿斯29.jpg" alt="20240411巴西布基阿斯29.jpg">
+        <div class="slideshow-container">
+            <img src="20240411巴西布基阿斯01.jpg" alt="20240411巴西布基阿斯01.jpg">
+            <img src="20240411巴西布基阿斯02.jpg" alt="20240411巴西布基阿斯02.jpg">
+            <img src="20240411巴西布基阿斯03.jpg" alt="20240411巴西布基阿斯03.jpg">
+            <img src="20240411巴西布基阿斯04.jpg" alt="20240411巴西布基阿斯04.jpg">
+            <img src="20240411巴西布基阿斯05.jpg" alt="20240411巴西布基阿斯05.jpg">
+            <img src="20240411巴西布基阿斯06.jpg" alt="20240411巴西布基阿斯06.jpg">
+            <img src="20240411巴西布基阿斯07.jpg" alt="20240411巴西布基阿斯07.jpg">
+            <img src="20240411巴西布基阿斯08.jpg" alt="20240411巴西布基阿斯08.jpg">
+            <img src="20240411巴西布基阿斯09.jpg" alt="20240411巴西布基阿斯09.jpg">
+            <img src="20240411巴西布基阿斯10.jpg" alt="20240411巴西布基阿斯10.jpg">
+            <img src="20240411巴西布基阿斯11.jpg" alt="20240411巴西布基阿斯11.jpg">
+            <img src="20240411巴西布基阿斯12.jpg" alt="20240411巴西布基阿斯12.jpg">
+            <img src="20240411巴西布基阿斯13.jpg" alt="20240411巴西布基阿斯13.jpg">
+            <img src="20240411巴西布基阿斯14.jpg" alt="20240411巴西布基阿斯14.jpg">
+            <img src="20240411巴西布基阿斯15.jpg" alt="20240411巴西布基阿斯15.jpg">
+            <img src="20240411巴西布基阿斯16.jpg" alt="20240411巴西布基阿斯16.jpg">
+            <img src="20240411巴西布基阿斯17.jpg" alt="20240411巴西布基阿斯17.jpg">
+            <img src="20240411巴西布基阿斯18.jpg" alt="20240411巴西布基阿斯18.jpg">
+            <img src="20240411巴西布基阿斯19.jpg" alt="20240411巴西布基阿斯19.jpg">
+            <img src="20240411巴西布基阿斯20.jpg" alt="20240411巴西布基阿斯20.jpg">
+            <img src="20240411巴西布基阿斯21.jpg" alt="20240411巴西布基阿斯21.jpg">
+            <img src="20240411巴西布基阿斯22.jpg" alt="20240411巴西布基阿斯22.jpg">
+            <img src="20240411巴西布基阿斯23.jpg" alt="20240411巴西布基阿斯23.jpg">
+            <img src="20240411巴西布基阿斯24.jpg" alt="20240411巴西布基阿斯24.jpg">
+            <img src="20240411巴西布基阿斯25.jpg" alt="20240411巴西布基阿斯25.jpg">
+            <img src="20240411巴西布基阿斯26.jpg" alt="20240411巴西布基阿斯26.jpg">
+            <img src="20240411巴西布基阿斯27.jpg" alt="20240411巴西布基阿斯27.jpg">
+            <img src="20240411巴西布基阿斯28.jpg" alt="20240411巴西布基阿斯28.jpg">
+            <img src="20240411巴西布基阿斯29.jpg" alt="20240411巴西布基阿斯29.jpg">
+            <div class="nav-buttons">
+                <button onclick="changeSlide(-1)">上一張</button>
+                <button onclick="changeSlide(1)">下一張</button>
+            </div>
+        </div>
     </div>
 
     <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slideshow-container img');
+
         function checkPassword() {
             const password = document.getElementById("pass").value;
             if (password === "12345") {
                 document.getElementById("gallery").style.display = "block";
                 document.getElementById("gallery").classList.add("show");
                 document.getElementById("pass").style.display = "none";
-                document.querySelector("button").style.display = "none";
+                document.querySelector("button[onclick='checkPassword()']").style.display = "none";
                 document.querySelector("p").style.display = "none";
+                showSlide(currentSlide); // 顯示第一張照片
             } else {
                 alert("密碼錯誤！");
             }
+        }
+
+        function showSlide(index) {
+            // 確保索引在有效範圍內
+            if (index >= slides.length) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = index;
+            }
+
+            // 隱藏所有照片，顯示當前照片
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
         }
     </script>
 </body>
