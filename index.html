@@ -91,12 +91,12 @@
         #gallery {
             margin-top: 20px;
             width: 100%;
-            max-width: 1000px; /* 增加最大寬度，充分利用螢幕 */
+            max-width: 1000px;
             box-sizing: border-box;
             position: relative;
             opacity: 0;
             transition: opacity 1s ease-in;
-            flex-grow: 1; /* 讓圖片區域填滿剩餘空間 */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -114,16 +114,16 @@
         .slideshow-container {
             position: relative;
             width: 100%;
-            height: 70vh; /* 增加高度，填滿更多螢幕空間 */
+            height: 70vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .slideshow-container img {
             display: none;
-            width: 100%;
-            height: auto;
-            max-height: 100%;
+            max-width: 100%; /* 限制最大寬度，保持比例 */
+            max-height: 100%; /* 限制最大高度，保持比例 */
+            height: auto; /* 保持原始比例 */
             border: 5px solid rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -141,14 +141,14 @@
             display: flex;
             justify-content: space-between;
             transform: translateY(-50%);
-            padding: 0 20px; /* 增加按鈕與邊緣的距離 */
+            padding: 0 20px;
             box-sizing: border-box;
         }
         .nav-buttons button {
             background: rgba(0, 0, 0, 0.7);
             padding: 12px 18px;
             font-size: 18px;
-            border-radius: 50%; /* 圓形按鈕 */
+            border-radius: 50%;
         }
         @keyframes fadeIn {
             from {
@@ -170,6 +170,7 @@
             }
             .slideshow-container img {
                 max-width: 90%;
+                max-height: 90%;
             }
             input[type="password"] {
                 width: 180px;
@@ -192,6 +193,7 @@
             }
             .slideshow-container img {
                 max-width: 85%;
+                max-height: 85%;
             }
             input[type="password"] {
                 width: 160px;
@@ -232,8 +234,7 @@
             <img src="20240411巴西布基阿斯11.jpg" alt="20240411巴西布基阿斯11.jpg">
             <img src="20240411巴西布基阿斯12.jpg" alt="20240411巴西布基阿斯12.jpg">
             <img src="20240411巴西布基阿斯13.jpg" alt="20240411巴西布基阿斯13.jpg">
-            <img src="2024
-0411巴西布基阿斯14.jpg" alt="20240411巴西布基阿斯14.jpg">
+            <img src="20240411巴西布基阿斯14.jpg" alt="20240411巴西布基阿斯14.jpg">
             <img src="20240411巴西布基阿斯15.jpg" alt="20240411巴西布基阿斯15.jpg">
             <img src="20240411巴西布基阿斯16.jpg" alt="20240411巴西布基阿斯16.jpg">
             <img src="20240411巴西布基阿斯17.jpg" alt="20240411巴西布基阿斯17.jpg">
