@@ -26,20 +26,10 @@
             box-sizing: border-box;
             padding: 20px;
         }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
         h1 {
             color: #ffffff;
             font-size: 48px;
-            margin: 0 10px 15px;
+            margin: 0 10px 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in;
             word-wrap: break-word;
@@ -89,7 +79,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         #gallery {
-            margin-top: 20px;
+            margin-top: 10px;
             width: 100%;
             max-width: 1000px;
             box-sizing: border-box;
@@ -109,24 +99,23 @@
             font-size: 32px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in;
-            margin: 0 0 20px;
+            margin: 0 0 15px;
         }
         .slideshow-container {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 85vh; /* 增加高度，放大畫面 */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .slideshow-container img {
             display: none;
-            max-width: 100%; /* 限制最大寬度，保持比例 */
-            max-height: 100%; /* 限制最大高度，保持比例 */
+            max-width: 98%; /* 增加寬度，減少兩側空白 */
+            max-height: 98%; /* 增加高度，減少下方空白 */
             height: auto; /* 保持原始比例 */
-            border: 5px solid rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: none; /* 去掉邊框 */
+            box-shadow: none; /* 去掉陰影 */
             transition: opacity 0.5s ease;
             box-sizing: border-box;
         }
@@ -141,14 +130,20 @@
             display: flex;
             justify-content: space-between;
             transform: translateY(-50%);
-            padding: 0 20px;
+            padding: 0 15px;
             box-sizing: border-box;
         }
         .nav-buttons button {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 12px 18px;
-            font-size: 18px;
-            border-radius: 50%;
+            background: transparent; /* 去掉背景 */
+            border: none;
+            color: #fff;
+            font-size: 36px; /* 放大箭頭 */
+            cursor: pointer;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .nav-buttons button:hover {
+            transform: scale(1.2);
         }
         @keyframes fadeIn {
             from {
@@ -166,19 +161,18 @@
                 font-size: 36px;
             }
             .slideshow-container {
-                height: 60vh;
+                height: 75vh;
             }
             .slideshow-container img {
-                max-width: 90%;
-                max-height: 90%;
+                max-width: 95%;
+                max-height: 95%;
             }
             input[type="password"] {
                 width: 180px;
                 max-width: 90%;
             }
             .nav-buttons button {
-                padding: 10px 15px;
-                font-size: 16px;
+                font-size: 28px;
             }
         }
         @media (max-width: 480px) {
@@ -189,11 +183,11 @@
                 font-size: 24px;
             }
             .slideshow-container {
-                height: 50vh;
+                height: 70vh; /* 手機上高度適當 */
             }
             .slideshow-container img {
-                max-width: 85%;
-                max-height: 85%;
+                max-width: 98%;
+                max-height: 98%;
             }
             input[type="password"] {
                 width: 160px;
@@ -206,8 +200,7 @@
                 padding: 0 10px;
             }
             .nav-buttons button {
-                padding: 8px 12px;
-                font-size: 14px;
+                font-size: 24px;
             }
         }
     </style>
@@ -251,8 +244,8 @@
             <img src="20240411巴西布基阿斯28.jpg" alt="20240411巴西布基阿斯28.jpg">
             <img src="20240411巴西布基阿斯29.jpg" alt="20240411巴西布基阿斯29.jpg">
             <div class="nav-buttons">
-                <button onclick="changeSlide(-1)">上一張</button>
-                <button onclick="changeSlide(1)">下一張</button>
+                <button onclick="changeSlide(-1)">&#10094;</button> <!-- 左箭頭 -->
+                <button onclick="changeSlide(1)">&#10095;</button> <!-- 右箭頭 -->
             </div>
         </div>
     </div>
